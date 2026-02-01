@@ -19,6 +19,7 @@ void insertarFinal(Nodo *&head, Nodo *&tail, int id, string nombre, float peso);
 void mostrarAdelante(Nodo *head);
 void mostrarAtras(Nodo *tail);
 Nodo *buscarPorId(Nodo *head, int id);
+bool eliminarPorId(Nodo *&head, Nodo *&tail, int id);
 
 // ---------------- FUNCIONES ----------------
 
@@ -110,4 +111,34 @@ Nodo *buscarPorId(Nodo *head, int id)
         aux = aux->sig;
     }
     return NULL;
+}
+
+bool eliminarPorId(Nodo *&head, Nodo *&tail, int id)
+{
+    Nodo *act = buscarPorId(head, id);
+    if (act == NULL)
+        return false;
+
+    if (act == head && act == tail)
+    {
+        head = tail = NULL;
+    }
+    else if (act == head)
+    {
+        head = act->sig;
+        head->ant = NULL;
+    }
+    else if (act == tail)
+    {
+        tail = act->ant;
+        tail->sig = NULL;
+    }
+    else
+    {
+        act->ant->sig = act->sig;
+        act->sig->ant = act->ant;
+    }
+
+    delete act;
+    return true;
 }
