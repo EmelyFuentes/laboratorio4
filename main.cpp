@@ -20,6 +20,7 @@ void mostrarAdelante(Nodo *head);
 void mostrarAtras(Nodo *tail);
 Nodo *buscarPorId(Nodo *head, int id);
 bool eliminarPorId(Nodo *&head, Nodo *&tail, int id);
+void liberarLista(Nodo*& head, Nodo*& tail);
 
 // ---------------- FUNCIONES ----------------
 
@@ -141,4 +142,13 @@ bool eliminarPorId(Nodo *&head, Nodo *&tail, int id)
 
     delete act;
     return true;
+}
+
+void liberarLista(Nodo*& head, Nodo*& tail) {
+    while (head != NULL) {
+        Nodo* borrar = head;
+        head = head->sig;
+        delete borrar;
+    }
+    tail = NULL;
 }
