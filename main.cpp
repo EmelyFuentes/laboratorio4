@@ -20,6 +20,10 @@ void mostrarAdelante(Nodo *head);
 void mostrarAtras(Nodo *tail);
 Nodo *buscarPorId(Nodo *head, int id);
 bool eliminarPorId(Nodo *&head, Nodo *&tail, int id);
+//funcion extra
+bool editarPaquete(Nodo* head, int id);
+
+int contarPaquetes(Nodo* head);
 void liberarLista(Nodo*& head, Nodo*& tail);
 
 // ---------------- FUNCIONES ----------------
@@ -142,6 +146,29 @@ bool eliminarPorId(Nodo *&head, Nodo *&tail, int id)
 
     delete act;
     return true;
+}
+
+bool editarPaquete(Nodo* head, int id) {
+    Nodo* p = buscarPorId(head, id);
+    if (p == NULL) return false;
+
+    cout << "Nuevo nombre: ";
+    cin.ignore();
+    getline(cin, p->nombre);
+
+    cout << "Nuevo peso: ";
+    cin >> p->peso;
+
+    return true;
+}
+
+int contarPaquetes(Nodo* head) {
+    int c = 0;
+    while (head != NULL) {
+        c++;
+        head = head->sig;
+    }
+    return c;
 }
 
 void liberarLista(Nodo*& head, Nodo*& tail) {
